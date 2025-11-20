@@ -1,0 +1,403 @@
+/* ==================================================
+   ENCRYPTIX STYLE SHEET - THIS IS THE ONE
+   ================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* -------------------- General -------------------- */
+body {
+  font-family: 'Poppins', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  background: radial-gradient(circle at 20% 20%, #f7f5ff, #ede7fa);
+  color: #2c2c2c;
+  overflow-x: hidden;
+}
+
+/* -------------------- Header -------------------- */
+header {
+  background: linear-gradient(270deg, #4b0082, #5a189a, #7b2cbf, #9d4edd);
+  background-size: 600% 600%;
+  color: #ffffff;
+  text-align: center;
+  padding: 40px 0 35px;
+  animation: gradientShift 10s ease infinite, fadeIn 2s ease-in;
+  box-shadow: 0 0 25px rgba(157, 78, 221, 0.6);
+  position: relative;
+  z-index: 1;
+}
+
+header img {
+  width: 180px;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.6));
+  margin-bottom: 10px;
+}
+
+header h1 {
+  font-size: 2.2rem;
+  letter-spacing: 1px;
+  margin: 10px 0 5px;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+}
+
+header p {
+  font-size: 1rem;
+  color: #e0d8f5;
+  margin: 0;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* -------------------- Menu Toggle -------------------- */
+.menu-toggle {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  background: rgba(75, 0, 130, 0.85);
+  color: #ffffff;
+  font-size: 1.6rem;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  z-index: 999;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 12px rgba(157, 78, 221, 0.4);
+}
+
+.menu-toggle:hover {
+  background: #7b2cbf;
+  box-shadow: 0 0 18px #c77dff;
+}
+
+@media (min-width: 769px) {
+  .menu-toggle { display: none; }
+}
+
+/* -------------------- Navigation -------------------- */
+nav {
+  background: rgba(90, 24, 154, 0.8);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  box-shadow: 0 2px 12px rgba(75, 0, 130, 0.3);
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+nav a {
+  color: #ffffff;
+  padding: 14px 20px;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+nav a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 3px;
+  left: 50%;
+  bottom: 6px;
+  background: #9d4edd;
+  transition: all 0.3s ease;
+  border-radius: 3px;
+}
+
+nav a:hover::after,
+nav a[aria-current="page"]::after {
+  width: 60%;
+  left: 20%;
+}
+
+nav a:hover { color: #d0aaff; }
+
+.site-nav.active {
+  flex-direction: column;
+  background: rgba(75, 0, 130, 0.96);
+  box-shadow: 0 4px 20px rgba(157, 78, 221, 0.5);
+  padding: 10px 0;
+}
+
+/* -------------------- Sections -------------------- */
+section {
+  padding: 40px 20px;
+  max-width: 1100px;
+  margin: auto;
+  animation: fadeUp 1.2s forwards;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* -------------------- Universal Box Layout -------------------- */
+.service-item,
+.card,
+.demo-box {
+  background: rgba(255, 255, 255, 0.97);
+  border-radius: 12px;
+  box-shadow: 0 0 14px rgba(157, 78, 221, 0.15);
+  padding: 22px 18px;
+  margin: 20px auto;
+  border: 1px solid rgba(157, 78, 221, 0.1);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.service-item:hover,
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 22px rgba(157, 78, 221, 0.3);
+  border-color: #c77dff;
+}
+
+.service-item h2,
+.service-item h3 {
+  color: #4b0082;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+/* Default paragraph behavior for content boxes (About, Who We Help, etc.) */
+.service-item p,
+.card p {
+  color: #2c2c2c;
+  font-size: 0.95rem;
+  margin: 10px auto;
+  text-align: left;
+  display: block;            /* reset any flex */
+  max-width: 72ch;           /* comfortable reading width */
+  line-height: 1.6;
+}
+
+/* -------------------- Buttons -------------------- */
+button,
+.btn,
+.cta-btn {
+  background: linear-gradient(135deg, #4b0082, #9d4edd);
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(157, 78, 221, 0.3);
+  position: relative;
+  overflow: hidden;
+  align-self: center;
+}
+
+button:hover,
+.btn:hover,
+.cta-btn:hover {
+  background: linear-gradient(135deg, #9d4edd, #c77dff);
+  transform: translateY(-2px);
+  box-shadow: 0 0 18px rgba(199, 125, 255, 0.6);
+}
+
+/* -------------------- Services Page Layout -------------------- */
+.service-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 equal columns on desktop */
+  gap: 25px;
+  align-items: stretch;
+  justify-items: center;
+  margin-top: 25px;
+  width: 100%;
+}
+
+/* Card tweaks specifically for the Services grid */
+.service-list .service-item {
+  min-height: 280px;
+  text-align: center;
+}
+
+/* Only center the teaser text inside Services cards */
+.service-list .service-item p {
+  text-align: center;
+  margin-bottom: 20px;
+  max-width: 60ch;
+}
+
+/* Align the View Demo button perfectly across all Services cards */
+.service-list .service-item .btn {
+  margin-top: auto;
+  align-self: center;
+  min-width: 120px;
+}
+
+/* Dropdown Menu Styling */
+#demo-select {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  margin-top: 12px;
+  border-radius: 8px;
+  border: 1px solid #9d4edd;
+  font-family: 'Poppins', sans-serif;
+  background: #f9f6ff;
+  color: #4b0082;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+#demo-select:hover,
+#demo-select:focus {
+  box-shadow: 0 0 10px rgba(157, 78, 221, 0.4);
+  outline: none;
+  border-color: #c77dff;
+}
+
+/* Border between dropdown sections */
+.dropdown-divider {
+    width: 100%;
+    height: 2px;
+    background: rgba(157, 78, 221, 0.4); /* nice soft purple line */
+    border-radius: 50px;
+    margin: 40px 0;
+}
+
+/* Responsive layout adjustments for Services */
+@media (max-width: 1100px) {
+  .service-list { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .service-list { grid-template-columns: 1fr; }
+}
+
+/* -------------------- Team Section -------------------- */
+.team-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+  justify-items: center;
+  margin-top: 30px;
+}
+
+.team-member {
+  background: rgba(255, 255, 255, 0.97);
+  border-radius: 12px;
+  box-shadow: 0 0 14px rgba(157, 78, 221, 0.15);
+  padding: 22px 18px;
+  text-align: center;
+  border: 1px solid rgba(157, 78, 221, 0.1);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 360px;
+  width: 100%;
+  max-width: 260px;
+}
+
+.team-member:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 22px rgba(157, 78, 221, 0.3);
+  border-color: #c77dff;
+}
+
+.team-member img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 0 12px rgba(157, 78, 221, 0.25);
+  transition: all 0.3s ease;
+}
+
+.team-member img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(199, 125, 255, 0.5);
+}
+
+.team-member h3 {
+  color: #4b0082;
+  margin: 8px 0;
+  font-size: 1.1rem;
+}
+
+.team-member p {
+  color: #2b2b2b;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+/* -------------------- Inputs & Forms -------------------- */
+input,
+textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 6px;
+  margin-bottom: 14px;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #9d4edd;
+  box-shadow: 0 0 8px rgba(157, 78, 221, 0.5);
+}
+
+/* -------------------- Footer -------------------- */
+footer {
+  background: linear-gradient(90deg, #4b0082, #5a189a, #7b2cbf);
+  color: #ffffff;
+  text-align: center;
+  padding: 25px;
+  margin-top: 60px;
+  font-size: 0.95rem;
+  position: relative;
+  box-shadow: 0 -4px 12px rgba(75, 0, 130, 0.4);
+}
+
+footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #9d4edd, #c77dff);
+  box-shadow: 0 0 12px rgba(199, 125, 255, 0.6);
+}
+
+/* -------------------- Animations -------------------- */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* -------------------- Responsive -------------------- */
+@media (max-width: 1100px) {
+  .team-container { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  nav { flex-direction: column; align-items: center; }
+  header img { width: 140px; }
+  .btn, button { width: 100%; }
+  .team-container { grid-template-columns: 1fr; }
+}

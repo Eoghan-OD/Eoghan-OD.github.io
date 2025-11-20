@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact Encryptix</title>
+  <meta name="description" content="Get in touch with Encryptix, a student-led project helping local veterinary clinics improve cybersecurity awareness.">
+
+  <meta property="og:title" content="Contact Encryptix">
+  <meta property="og:description" content="Contact Encryptix to learn more about our encryption awareness project for veterinary clinics.">
+  <meta property="og:image" content="encryptix-pixtures/EncryptixLogo.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://encryptix.ie/Encryptix-contact.html">
+
+  <link rel="icon" type="image/png" href="encryptix-pixtures/EncryptixLogo.png">
+  <link rel="stylesheet" href="Encryptix-style.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header" role="banner">
+    <a href="Encryptix-index.html">
+      <img src="encryptix-pixtures/EncryptixLogo.png" alt="Encryptix logo" width="160" loading="lazy">
+    </a>
+    <h1>Encryptix</h1>
+    <p>Cybersecurity and encryption awareness for veterinary clinics</p>
+  </header>
+
+  <!-- Navigation -->
+  <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+  <nav class="site-nav" aria-label="Main site navigation">
+    <a href="Encryptix-index.html">Home</a>
+    <a href="Encryptix-services.html">Services</a>
+    <a href="Encryptix-who.html">Meet the Team</a>
+    <a href="Encryptix-contact.html" aria-current="page">Contact</a>
+  </nav>
+
+  <!-- Contact Section -->
+  <section>
+    <div class="service-item">
+      <h2>Contact Encryptix</h2>
+      <p>
+        Encryptix is a student project created by third-year IT and Cybersecurity students at MTU. 
+        Our focus is to raise cybersecurity awareness within local veterinary practices by showing how encryption 
+        can secure data, records, and communication systems.
+      </p>
+    </div>
+
+    <div class="service-item">
+      <h3>Get in Touch</h3>
+      <p>
+        If you would like to learn more about our project, explore our encryption demonstrations, 
+        or share feedback, please reach out to us using the details below.
+      </p>
+    </div>
+
+    <div class="service-item">
+      <h3>Contact Details</h3>
+      <p><strong>Email:</strong> <a href="mailto:info@encryptix.ie">info@encryptix.ie</a></p>
+      <p><strong>Telephone:</strong> +353 1 234 5678</p>
+    </div>
+
+    <div class="service-item">
+      <h3>Send a Message</h3>
+      <p>Please fill out the form below, and our team will respond as soon as possible.</p>
+      <form id="contact-form" aria-label="Contact form">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Your Name" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="you@clinic.ie" required>
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" placeholder="How can we help?" required></textarea>
+
+        <button type="submit" class="btn">Send Message</button>
+      </form>
+      <p class="form-status" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>© 2025 Encryptix Project. All rights reserved. Supervised by Hristo Trifonov.</p>
+  </footer>
+
+  <script src="Encryptix-scripts.js"></script>
+</body>
+</html>

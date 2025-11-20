@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Asymmetric Encryption - Encryptix</title>
+  <meta name="description" content="Try the Encryptix asymmetric encryption demo showing public and private key encryption.">
+  <meta property="og:title" content="Asymmetric Encryption - Encryptix">
+  <meta property="og:description" content="Explore public and private key encryption with this educational demo by Encryptix.">
+  <meta property="og:image" content="encryptix-pixtures/EncryptixLogo.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://encryptix.ie/Encryptix-asymmetric.html">
+
+  <link rel="icon" type="image/png" href="encryptix-pixtures/EncryptixLogo.png">
+  <link rel="stylesheet" href="Encryptix-style.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header" role="banner">
+    <a href="Encryptix-index.html">
+      <img src="encryptix-pixtures/EncryptixLogo.png" alt="Encryptix logo" width="160" loading="lazy">
+    </a>
+    <h1>Encryptix</h1>
+    <p>Cybersecurity and encryption awareness for veterinary clinics</p>
+  </header>
+
+  <!-- Navigation -->
+  <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+  <nav class="site-nav" aria-label="Main site navigation">
+    <a href="Encryptix-index.html">Home</a>
+    <a href="Encryptix-services.html" aria-current="page">Services</a>
+    <a href="Encryptix-who.html">Meet the Team</a>
+    <a href="Encryptix-contact.html">Contact</a>
+  </nav>
+
+  <!-- Demo Section -->
+  <section>
+  <div class="service-item">
+    <h2>Asymmetric Encryption Demo (Public and Private Keys)</h2>
+    <p>
+      This demo shows how a message can be locked with a public key and unlocked with a private key.
+      Imagine a vet clinic shares their public key so partner shelters can send information securely,
+      while the clinic keeps the private key secret.
+    </p>
+
+    <div class="demo-box">
+      <label for="asym-text"><strong>Step 1 - Type a message</strong></label>
+      <input id="asym-text" type="text" placeholder="Example: Appointment details for Bella the dog">
+
+      <button id="asym-run" class="btn" style="margin-top:10px;">
+        Run Asymmetric Encryption Demo
+      </button>
+
+      <p id="asym-steps" class="demo-result" style="margin-top:14px; white-space:pre-wrap;"></p>
+
+      <p class="hint" style="font-size:0.9rem; color:#444; margin-top:8px;">
+        Behind the scenes this uses RSA-OAEP with SHA-256 in your browser. This demo is meant to be a simple repersentation 
+        of the TLS handshake done by programs such as OpenSSL. Asymmetric encryption is vital in encrypting internet traffic 
+        such as emails as without encrypting a message it leaves its contents vunerable to packet sniffing programs such as wireshark
+      </p>
+    </div>
+
+    <a href="Encryptix-services.html" class="btn" style="margin-top:14px;">← Back to Services</a>
+  </div>
+  </section>
+ 
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>© 2025 Encryptix Project. All rights reserved. Supervised by Hristo Trifonov.</p>
+  </footer>
+
+  <script src="Encryptix-scripts.js"></script>
+</body>
+</html>

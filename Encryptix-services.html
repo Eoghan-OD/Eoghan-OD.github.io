@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Encryptix - Encryption Demos for Veterinary Clinics</title>
+  <meta name="description" content="Explore Encryptix's interactive encryption demos to understand key cybersecurity techniques.">
+
+  <link rel="icon" type="image/png" href="encryptix-pixtures/EncryptixLogo.png">
+  <link rel="stylesheet" href="Encryptix-style.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header" role="banner">
+    <a href="Encryptix-index.html">
+      <img src="encryptix-pixtures/EncryptixLogo.png" alt="Encryptix logo" width="160" loading="lazy">
+    </a>
+    <h1>Encryptix</h1>
+    <p>Cybersecurity and encryption awareness for veterinary clinics</p>
+  </header>
+
+  <!-- Navigation -->
+  <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+  <nav class="site-nav" aria-label="Main site navigation">
+    <a href="Encryptix-index.html">Home</a>
+    <a href="Encryptix-services.html" aria-current="page">Services</a>
+    <a href="Encryptix-who.html">Meet the Team</a>
+    <a href="Encryptix-contact.html">Contact</a>
+  </nav>
+
+  <!-- Intro + Dropdown Section -->
+  <section>
+    <div class="service-item">
+      <details class="demo-dropdown">
+        <summary>
+          <h2>What Encryptix Provides for You</h2>
+          <p>
+            Discover the practical services and protections Encryptix brings to veterinary
+            clinics and animal shelters. Click to reveal how we support your security needs.
+          </p>
+        </summary>
+
+        <div class="service-list">
+          <div class="service-item">
+            <h3>Staff Training & Awareness</h3>
+            <p>
+              We teach your team how encryption works, how to detect digital threats, and how
+              to maintain safe data handling practices in a busy clinical environment.
+            </p>
+          </div>
+
+          <div class="service-item">
+            <h3>Data Encryption Setup</h3>
+            <p>
+              We configure strong encryption for client records, payment information, medical
+              histories, and internal communications to keep your data protected at all times.
+            </p>
+          </div>
+
+          <div class="service-item">
+            <h3>Secure Communications</h3>
+            <p>
+              Encryptix helps implement encrypted channels for email, referrals, and
+              inter-practice communication so sensitive information cannot be intercepted.
+            </p>
+          </div>
+
+          <div class="service-item">
+            <h3>Compliance Assistance</h3>
+            <p>
+              We guide your clinic through GDPR and Irish Data Protection requirements,
+              ensuring your encryption practices meet legal and ethical standards.
+            </p>
+          </div>
+        </div>
+      </details>
+      
+      <div class="dropdown-divider"></div>
+
+      <details class="demo-dropdown" >
+        <summary>
+          <h2>Our Encryption Demonstrations</h2>
+          <p>
+            Explore how encryption protects sensitive information in veterinary practices.
+            Each demo illustrates a key concept of data protection. Click to show or hide
+            the available demonstrations.
+          </p>
+        </summary>
+
+        <!-- Grid of Demo Links (revealed when dropdown is open) -->
+        <div class="service-list">
+          <div class="service-item">
+            <h3>Symmetric Encryption</h3>
+            <p>
+              Uses a single shared key for encryption and decryption. Ideal for fast, secure
+              communication within a practice.
+            </p>
+            <a href="Encryptix-symmetric.html" class="btn">View Demo</a>
+          </div>
+
+          <div class="service-item">
+            <h3>Asymmetric Encryption</h3>
+            <p>
+              Employs public and private key pairs for secure information exchange — essential
+              for secure client communications.
+            </p>
+            <a href="Encryptix-asymmetric.html" class="btn">View Demo</a>
+          </div>
+
+          <div class="service-item">
+            <h3>Hashing</h3>
+            <p>
+              Transforms data into fixed-length values to protect passwords and verify integrity
+              without storing plain text data.
+            </p>
+            <a href="Encryptix-hashing.html" class="btn">View Demo</a>
+          </div>
+
+          <div class="service-item">
+            <h3>Hybrid Encryption</h3>
+            <p>
+              Combines the strengths of symmetric and asymmetric encryption for both speed
+              and security.
+            </p>
+            <a href="Encryptix-hybrid.html" class="btn">View Demo</a>
+          </div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>© 2025 Encryptix Project. All rights reserved. Supervised by Hristo Trifonov.</p>
+  </footer>
+
+  <script src="Encryptix-scripts.js"></script>
+</body>
+</html>

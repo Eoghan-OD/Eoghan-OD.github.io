@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hashing - Encryptix</title>
+  <meta name="description" content="Learn how hashing protects passwords and verifies data integrity with Encryptix.">
+  <meta property="og:title" content="Hashing - Encryptix">
+  <meta property="og:description" content="See how SHA-256 hashing turns data into irreversible, secure values.">
+  <meta property="og:image" content="encryptix-pixtures/EncryptixLogo.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://encryptix.ie/Encryptix-hashing.html">
+
+  <link rel="icon" type="image/png" href="encryptix-pixtures/EncryptixLogo.png">
+  <link rel="stylesheet" href="Encryptix-style.css" />
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <a href="Encryptix-index.html">
+      <img src="encryptix-pixtures/EncryptixLogo.png" alt="Encryptix logo" width="160" loading="lazy">
+    </a>
+    <h1>Encryptix</h1>
+    <p>Cybersecurity and encryption awareness for veterinary clinics</p>
+  </header>
+
+  <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+  <nav class="site-nav" aria-label="Main site navigation">
+    <a href="Encryptix-index.html">Home</a>
+    <a href="Encryptix-services.html" aria-current="page">Services</a>
+    <a href="Encryptix-who.html">Meet the Team</a>
+    <a href="Encryptix-contact.html">Contact</a>
+  </nav>
+
+  <section>
+    <div class="service-item">
+      <h2>Hashing (Bradley)</h2>
+      <p>
+        Hashing converts text into a fixed-length, irreversible string. 
+        It’s often used to secure passwords or verify the integrity of records.
+      </p>
+
+      <div class="demo-box">
+        <input id="hash-input" type="text" placeholder="Enter text to hash">
+        <button id="hash-generate">Generate SHA-256</button>
+        <button id="hash-verify">Verify Hash</button>
+        <p id="hash-result" class="demo-result"></p>
+      </div>
+
+      <a href="Encryptix-services.html" class="btn">← Back to Services</a>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <p>© 2025 Encryptix Project. All rights reserved. Supervised by Hristo Trifonov.</p>
+  </footer>
+
+  <script src="Encryptix-hashing.js"></script>
+</body>
+</html>

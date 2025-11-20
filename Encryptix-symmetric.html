@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>File Encryptor - Encryptix</title>
+  <meta name="description" content="Client-side file encryption and decryption with AES-GCM using a passphrase.">
+  <meta property="og:title" content="File Encryptor - Encryptix">
+  <meta property="og:description" content="Encrypt and decrypt text files locally in your browser with AES-GCM.">
+  <meta property="og:image" content="encryptix-pixtures/EncryptixLogo.png">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" type="image/png" href="encryptix-pixtures/EncryptixLogo.png">
+  <link rel="stylesheet" href="Encryptix-style.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header" role="banner">
+    <a href="Encryptix-index.html">
+      <img src="encryptix-pixtures/EncryptixLogo.png" alt="Encryptix logo" width="160" loading="lazy">
+    </a>
+    <h1>Encryptix</h1>
+    <p>Cybersecurity and encryption awareness for veterinary clinics</p>
+  </header>
+
+  <!-- Navigation -->
+  <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+  <nav class="site-nav" aria-label="Main site navigation">
+    <a href="Encryptix-index.html">Home</a>
+    <a href="Encryptix-services.html" aria-current="page">Services</a>
+    <a href="Encryptix-who.html">Meet the Team</a>
+    <a href="Encryptix-contact.html">Contact</a>
+  </nav>
+
+  <!-- Demo Section -->
+  <section>
+    <div class="service-item">
+      <h2>File Encryptor Demo</h2>
+      <p>
+        Encrypt or decrypt a text file using a passphrase. Everything happens locally in your browser using AES-GCM. 
+        Encrypted files use a simple header format so the tool can auto-read the salt and IV on decrypt.
+      </p>
+
+      <div class="demo-box">
+        <label for="fe-file"><strong>1) Choose file</strong></label>
+        <input id="fe-file" type="file" accept=".txt,.log,.csv,.md,.json,.enc" />
+
+        <label for="fe-pass"><strong>2) Enter key phrase</strong></label>
+        <input id="fe-pass" type="password" placeholder="Enter a strong key phrase" />
+
+        <div class="btns" style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+          <button id="fe-encrypt" class="btn">Encrypt and download</button>
+          <button id="fe-decrypt" class="btn">Decrypt and download</button>
+        </div>
+
+        <p id="fe-status" class="demo-result" style="margin-top:12px;"></p>
+        <p class="hint" style="font-size:.9rem; color:#444;">
+          Format: <code>ENX1</code> + 16-byte salt + 12-byte IV + ciphertext
+        </p>
+      </div>
+
+      <a href="Encryptix-services.html" class="btn" style="margin-top:14px;">← Back to Services</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>© 2025 Encryptix Project. All rights reserved. Supervised by Hristo Trifonov.</p>
+  </footer>
+
+  <script>
+  // Mobile menu toggle to match site nav behavior
+  document.querySelector('.menu-toggle').addEventListener('click', () => {
+    document.querySelector('.site-nav').classList.toggle('active');
+  });
+
+  // -------- Client-side File Encryptor (AES-GCM + PBKDF2) --------
+  const MAGIC = new TextEncoder().encode("ENX1");
+  const SALT_LEN = 16;
+  const IV_LEN = 12;
+  const PBKDF2_ITER = 200000;
+
+  const enc = new TextEncoder();
+  const dec = new TextDecoder();
+
+  const $ = (id) => document.getElementById(id);
+  const setStatus = (msg, ok=false, err=false) => {
+    const el = $("fe-status");
+    el.textContent = msg;
+    el.style.color = err ? "#8a0000" : ok ? "#116611" : "inherit";
+  };
+
+  function readFileAsArrayBuffer(file) {
+    return new Promise((resolve, reject) => {
+      const fr = new FileReader();
+      fr.onload = () => resolve(fr.result);
+      fr.onerror = reject;
+      fr.readAsArrayBuffer(file);
+    });
+  }
+
+  async function deriveKey(pass, salt) {
+    const keyMaterial = await crypto.subtle.importKey(
+      "raw",
+      enc.encode(pass),
+      { name: "PBKDF2" },
+      false,
+      ["deriveKey"]
+    );
+    return crypto.subtle.deriveKey(
+      { name: "PBKDF2", salt, iterations: PBKDF2_ITER, hash: "SHA-256" },
+      keyMaterial,
+      { name: "AES-GCM", length: 256 },
+      false,
+      ["encrypt", "decrypt"]
+    );
+  }
+
+  function isEncryptedFormat(bytes) {
+    if (bytes.byteLength < MAGIC.byteLength + SALT_LEN + IV_LEN + 1) return false;
+    const head = new Uint8Array(bytes.slice(0, MAGIC.byteLength));
+    return head.every((b, i) => b === MAGIC[i]);
+  }
+
+  function downloadBlob(data, filename) {
+    const blob = new Blob([data]);
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => {
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }, 0);
+  }
+
+  $("fe-encrypt").addEventListener("click", async () => {
+    try {
+      setStatus("Encrypting...");
+      const file = $("fe-file").files[0];
+      const pass = $("fe-pass").value;
+
+      if (!file) { setStatus("Please choose a file to encrypt.", false, true); return; }
+      if (!pass) { setStatus("Please enter a key phrase.", false, true); return; }
+      if (file.size > 25 * 1024 * 1024) {
+        setStatus("File is larger than 25 MB. Consider splitting for better performance.", false, true);
+        return;
+      }
+
+      const plainBuf = await readFileAsArrayBuffer(file);
+      const salt = crypto.getRandomValues(new Uint8Array(SALT_LEN));
+      const iv = crypto.getRandomValues(new Uint8Array(IV_LEN));
+      const key = await deriveKey(pass, salt);
+
+      const cipherBuf = await crypto.subtle.encrypt({ name: "AES-GCM", iv }, key, plainBuf);
+
+      // Compose: MAGIC | SALT | IV | CIPHERTEXT
+      const out = new Uint8Array(MAGIC.byteLength + SALT_LEN + IV_LEN + cipherBuf.byteLength);
+      out.set(MAGIC, 0);
+      out.set(salt, MAGIC.byteLength);
+      out.set(iv, MAGIC.byteLength + SALT_LEN);
+      out.set(new Uint8Array(cipherBuf), MAGIC.byteLength + SALT_LEN + IV_LEN);
+
+      const outName = (file.name.replace(/\.(txt|log|csv|md|json)$/i, "") || file.name) + ".enc";
+      downloadBlob(out, outName);
+      setStatus("Encrypted successfully. Saved " + outName, true);
+    } catch (err) {
+      console.error(err);
+      setStatus("Encryption failed. " + (err && err.message ? err.message : ""), false, true);
+    }
+  });
+
+  $("fe-decrypt").addEventListener("click", async () => {
+    try {
+      setStatus("Decrypting...");
+      const file = $("fe-file").files[0];
+      const pass = $("fe-pass").value;
+
+      if (!file) { setStatus("Please choose the .enc file to decrypt.", false, true); return; }
+      if (!pass) { setStatus("Please enter the original key phrase.", false, true); return; }
+
+      const inBuf = await readFileAsArrayBuffer(file);
+      if (!isEncryptedFormat(inBuf)) {
+        setStatus("This file does not look like an Encryptix .enc file.", false, true);
+        return;
+      }
+
+      const bytes = new Uint8Array(inBuf);
+      const saltStart = MAGIC.byteLength;
+      const ivStart = saltStart + SALT_LEN;
+      const ctStart = ivStart + IV_LEN;
+
+      const salt = bytes.slice(saltStart, saltStart + SALT_LEN);
+      const iv = bytes.slice(ivStart, ivStart + IV_LEN);
+      const ciphertext = bytes.slice(ctStart);
+
+      const key = await deriveKey(pass, salt);
+      const plainBuf = await crypto.subtle.decrypt({ name: "AES-GCM", iv }, key, ciphertext);
+
+      let outName = file.name.replace(/\.enc$/i, "") || (file.name + ".decrypted.txt");
+      if (!/\.txt$/i.test(outName)) outName += ".txt";
+      downloadBlob(new Uint8Array(plainBuf), outName);
+      setStatus("Decrypted successfully. Saved " + outName, true);
+    } catch (err) {
+      console.error(err);
+      setStatus("Decryption failed. This usually means the key phrase is incorrect or the file is corrupted.", false, true);
+    }
+  });
+  </script>
+</body>
+</html>
